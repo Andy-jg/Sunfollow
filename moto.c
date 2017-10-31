@@ -1,10 +1,16 @@
 #include<stdio.h>
 #include<wiringPi.h>
+#include<time.h>
 #define Pformangle 5
 #define Psunangle 1
 void init();
 int main()
-{
+{      
+        time_t t;
+        struct tm * lt;
+        time (&t);//获取Unix时间戳。
+        lt = localtime (&t);//转为时间结构。
+        printf ( "%d/%d/%d %d:%d:%d\n",lt->tm_year+1900, lt->tm_mon, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec);//输出结果
         init();
         int formangle=0;
 		int sunangle=0;
@@ -14,7 +20,7 @@ int main()
         int i=0;
         float x=0;
 
-       unsigned char  k=2;//180娆″惊鐜殑鏃堕棿澶熶簡
+       unsigned char  k=2;//180次循环的时间够了
         for(k=0;k<2;k++)//(k--)
         {
                 x=11.11*sunangle;
@@ -35,7 +41,7 @@ int main()
         
          }
 		 
-	printf("Game Over");        
+	printf("Game Over ! \n");        
         return 0;
 }
 
